@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Converter</title>
+</head>
+<body>
+    <h1>India and UK Time Converter</h1>
+    
+    <label for="time">Enter Time in IST (HH:MM):</label>
+    <input type="time" id="time"><br><br>
+    
+    <button onclick="convertToUK()">Convert to UK Time</button>
+    <p id="uk-time"></p>
+
+    <script>
+        function convertToUK() {
+
+            const timeInput = document.getElementById("time").value;
+            if (!timeInput) {
+                document.getElementById("uk-time").innerText = "Please enter a valid time.";
+                return;
+            }
+            
+         
+            const [hours, minutes] = timeInput.split(":").map(Number);
+
+          
+            const istTime = new Date();
+            istTime.setHours(hours, minutes, 0);
+
+          
+            const ukTime = new Date(istTime.getTime() - 5.5 * 60 * 60 * 1000);
+
+            const ukHours = ukTime.getUTCHours().toString().padStart(2, "0");
+            const ukMinutes = ukTime.getUTCMinutes().toString().padStart(2, "0");
+
+        
+            document.getElementById("uk-time").innerText = UKtime   (ukHours)(ukMinutes);
+        }
+    </script>
+    </body>
+    </html>

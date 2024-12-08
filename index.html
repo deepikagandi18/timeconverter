@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Time Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        input {
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Time Converter</h1>
+
+    <!-- Input for UK time -->
+    <input type="number" id="uk" placeholder="Enter UK Time (HH:mm)" oninput="convertTime('uk')">
+
+    <h2>=</h2>
+
+
+    <!-- Input for India time -->
+    <input type="number" id="india" placeholder="Converted India Time" oninput="convertTime('india')">
+
+    <script>
+        function convertTime(caller) {
+            const ukInput = document.getElementById('uk');
+            const indiaInput = document.getElementById('india');
+            const offset = 5.5 * 60 * 60 * 1000; // Offset for UK to India (5 hours 30 minutes in milliseconds)
+
+            if (caller === 'uk' && ukInput.value !== '') {
+                const ukTimeInMillis = parseInt(ukInput.value) * 60 * 60 * 1000;  // Convert from hours to milliseconds
+                indiaInput.value = (ukTimeInMillis + offset) / (60 * 60 * 1000);  // Convert back to hours and display
+            } else if (caller === 'india' && indiaInput.value !== '') {
+                const indiaTimeInMillis = parseInt(indiaInput.value) * 60 * 60 * 1000;  // Convert from hours to milliseconds
+                ukInput.value = (indiaTimeInMillis - offset) / (60 * 60 * 1000);  // Convert back to hours and display
+            }
+        }
+    </script>
+</body>
+</html>
